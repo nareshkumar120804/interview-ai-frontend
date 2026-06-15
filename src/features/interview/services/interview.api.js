@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
+
   baseURL: "https://interview-ai-backend-2-zvpg.onrender.com",
-  withCredentials: true,
+   withCredentials: true,
 });
 
 // Safe error handler (optional but useful)
@@ -79,4 +80,3 @@ export const generateResumePdf = async ({ interviewReportId }) => {
     throw new Error(handleError(err));
   }
 };
-

@@ -23,6 +23,7 @@ export const useAuth = () => {
         }
     }
 
+
  
 
     const handleRegister = async ({ username, email, password }) => {
@@ -60,7 +61,7 @@ export const useAuth = () => {
                 setLoading(false)
             }
         }
-
+     
         getAndSetUser()
 
     }, [])

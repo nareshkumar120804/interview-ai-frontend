@@ -21,6 +21,7 @@ const Login = () => {
     }
 }
 
+
     if(loading){
         return (<main><h1>Loading.......</h1></main>)
     }
@@ -52,3 +53,4 @@ const Login = () => {
 }
 
 export default Login
+

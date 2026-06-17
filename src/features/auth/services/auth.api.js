@@ -7,6 +7,8 @@ const api = axios.create({
   withCredentials: true,
 });
 
+console.log("🔥 API BASE URL =", api.defaults.baseURL);
+
 // Helper: safe error extractor
 const handleError = (err) => {
   return err?.response?.data?.message || err.message || "Something went wrong";
@@ -27,6 +29,7 @@ export async function register({ username, email, password }) {
 }
 
 export async function login({ email, password }) {
+  console.log("LOGIN API HIT");
   try {
     const response = await api.post("/api/auth/login", {
       email,

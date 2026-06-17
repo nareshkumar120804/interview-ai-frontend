@@ -2,12 +2,12 @@ import axios from "axios";
 
 const api = axios.create({
 
-  baseURL: "https://interview-ai-backend-2-zvpg.onrender.com",
+  baseURL: import.meta.env.VITE_API_URL,
 
   withCredentials: true,
 });
 
-console.log("🔥 API BASE URL =", api.defaults.baseURL);
+
 
 // Helper: safe error extractor
 const handleError = (err) => {

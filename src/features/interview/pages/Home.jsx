@@ -18,6 +18,11 @@ const Home = () => {
     try {
       const resumeFile = resumeInputRef.current?.files?.[0];
 
+      if (!jobDescription.trim()) {
+        alert("Please provide a Target Job Description.");
+        return;
+      }
+
       if (!resumeFile && !selfDescription.trim()) {
         alert("Please upload a resume or write a self description.");
         return;
@@ -38,7 +43,7 @@ const Home = () => {
 
       navigate(`/interview/${interviewId}`);
     } catch (error) {
-      alert("Something went wrong.");
+      alert(error.message || "Something went wrong.");
     }
   };
 

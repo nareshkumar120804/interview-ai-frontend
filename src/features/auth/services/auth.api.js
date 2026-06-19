@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-
-  baseURL:"https://interview-ai-backend-2-zvpg.onrender.com",
-
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
   withCredentials: true,
 });
 
@@ -29,7 +27,7 @@ export async function register({ username, email, password }) {
 }
 
 export async function login({ email, password }) {
-  console.log("LOGIN API HIT");
+  
   try {
     const response = await api.post("/api/auth/login", {
       email,

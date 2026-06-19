@@ -12,14 +12,16 @@ const Login = () => {
     const [ password, setPassword ] = useState("")
 
    const handleSubmit = async (e) => {
-  e.preventDefault();
-
- // const success = await handleLogin({ email, password });
-   const data = await handleLogin({ email, password })
-    if (data?.user) {
-        navigate("/")
-    }
-}
+      e.preventDefault();
+      try {
+          const data = await handleLogin({ email, password });
+          if (data?.user) {
+              navigate("/");
+          }
+      } catch (err) {
+          alert(err.message || "Login failed");
+      }
+   }
 
 
     if(loading){

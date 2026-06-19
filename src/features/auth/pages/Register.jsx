@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import "../auth.form.scss"
 import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
@@ -13,8 +14,14 @@ const Register = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
+        try {
+            const data = await handleRegister({ username, email, password })
+            if (data?.user) {
+                navigate("/")
+            }
+        } catch (err) {
+            alert(err.message || "Registration failed")
+        }
     }
 
     if(loading){

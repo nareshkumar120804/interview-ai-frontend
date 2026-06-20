@@ -1,7 +1,7 @@
 import { getAllInterviewReports, generateInterviewReport, getInterviewReportById, generateResumePdf } from "../services/interview.api"
 import { useContext, useEffect } from "react"
 import { InterviewContext } from "../interview.context"
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router"
 
 
 export const useInterview = () => {
@@ -15,29 +15,20 @@ export const useInterview = () => {
 
     const { loading, setLoading, report, setReport, reports, setReports } = context
 
-   
     const generateReport = async ({ jobDescription, selfDescription, resumeFile }) => {
-    setLoading(true);
+        setLoading(true)
+        let response = null
+        try {
+            response = await generateInterviewReport({ jobDescription, selfDescription, resumeFile })
+            setReport(response.interviewReport)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
 
-    try {
-        const response = await generateInterviewReport({
-            jobDescription,
-            selfDescription,
-            resumeFile
-        });
-
-        const report = response?.interviewReport;
-
-        setReport(report);
-
-        return report;
-    } catch (error) {
-        console.log(error);
-        return null;
-    } finally {
-        setLoading(false);
+        return response.interviewReport
     }
-};
 
     const getReportById = async (interviewId) => {
         setLoading(true)

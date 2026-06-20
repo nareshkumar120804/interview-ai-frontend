@@ -1,6 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../auth.context";
-import { login, register, logout, getMe } from "../services/auth.api";
+import { login, register, logout } from "../services/auth.api";
 
 
 
@@ -9,27 +9,34 @@ export const useAuth = () => {
     const context = useContext(AuthContext)
     const { user, setUser, loading, setLoading } = context
 
+
     const handleLogin = async ({ email, password }) => {
-        setLoading(true)
+        setLoading(true);
         try {
-            const data = await login({ email, password })
-            setUser(data.user)
-            return data
+            const data = await login({ email, password });
+            setUser(data.user);
+            return { success: true, data };
         } catch (err) {
-            throw err
+            return {
+                success: false,
+                message: err.response?.data?.message || "Login failed"
+            };
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     const handleRegister = async ({ username, email, password }) => {
         setLoading(true)
         try {
             const data = await register({ username, email, password })
             setUser(data.user)
-            return data
+            return { success: true, data }
         } catch (err) {
-            throw err
+            return {
+                success: false,
+                message: err.response?.data?.message || "Registration failed"
+            }
         } finally {
             setLoading(false)
         }
@@ -38,11 +45,14 @@ export const useAuth = () => {
     const handleLogout = async () => {
         setLoading(true)
         try {
-            const data = await logout()
+            await logout()
             setUser(null)
-            return data
+            return { success: true }
         } catch (err) {
-            throw err
+            return {
+                success: false,
+                message: err.response?.data?.message || "Logout failed"
+            }
         } finally {
             setLoading(false)
         }
@@ -50,5 +60,3 @@ export const useAuth = () => {
 
     return { user, loading, handleRegister, handleLogin, handleLogout }
 }
-
-

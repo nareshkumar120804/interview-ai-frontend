@@ -1,62 +1,31 @@
-import axios from "axios";
+import axios from "axios"
+
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://interview-ai-backend-1-pt62.onrender.com",
-  withCredentials: true,
-});
-
-
-
-// Helper: safe error extractor
-const handleError = (err) => {
-  return err?.response?.data?.message || err.message || "Something went wrong";
-};
+    baseURL: "http://localhost:3000",
+    withCredentials: true
+})
 
 export async function register({ username, email, password }) {
-  try {
-    const response = await api.post("/api/auth/register", {
-      username,
-      email,
-      password,
-    });
-
-    return response.data;
-  } catch (err) {
-    throw new Error(handleError(err));
-  }
+    const response = await api.post('/api/auth/register', {
+        username, email, password
+    })
+    return response.data
 }
 
 export async function login({ email, password }) {
-  
-  try {
     const response = await api.post("/api/auth/login", {
-      email,
-      password,
-    });
-
-    return response.data;
-  } catch (err) {
-    throw new Error(handleError(err));
-  }
+        email, password
+    })
+    return response.data
 }
 
 export async function logout() {
-  try {
-    const response = await api.get("/api/auth/logout");
-    return response.data;
-  } catch (err) {
-    throw new Error(handleError(err));
-  }
+    const response = await api.get("/api/auth/logout")
+    return response.data
 }
 
 export async function getMe() {
-  try {
-    const response = await api.get("/api/auth/get-me");
-    return response.data;
-  } catch (err) {
-    return null;
-  }
+    const response = await api.get("/api/auth/get-me")
+    return response.data
 }
-
-
-

@@ -29,6 +29,37 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     justify-content: center;
     padding: 3rem 1.5rem;
     gap: 2rem;
+    position: relative;
+}
+
+.header-actions {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: -1rem;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid rgba($accent, 0.4);
+    color: $accent-alt;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+        background-color: $accent;
+        border-color: $accent;
+        color: #ffffff;
+        box-shadow: 0 0 12px rgba($accent, 0.4);
+    }
 }
 
 // ── Page Header ──────────────────────────────────────────────────────────────
@@ -302,7 +333,7 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $accent 0%, color.adjust($accent, $lightness: -10%) 100%);
+    background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 600;

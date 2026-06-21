@@ -17,7 +17,11 @@ const Home = () => {
     const handleGenerateReport = async () => {
         const resumeFile = resumeInputRef.current.files[ 0 ]
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
+        if (data && data._id) {
+            navigate(`/interview/${data._id}`)
+        } else {
+            alert("Failed to generate interview strategy. Please make sure you are logged in and try again.")
+        }
     }
 
     if (loading) {

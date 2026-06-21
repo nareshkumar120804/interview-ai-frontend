@@ -62,12 +62,6 @@ const Interview = () => {
     const { report, getReportById, loading, getResumePdf } = useInterview()
     const { interviewId } = useParams()
 
-    useEffect(() => {
-        if (interviewId) {
-            getReportById(interviewId)
-        }
-    }, [ interviewId ])
-
 
 
     if (loading || !report) {
